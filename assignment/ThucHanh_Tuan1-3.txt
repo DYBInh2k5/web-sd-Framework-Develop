@@ -1,0 +1,32 @@
+BÀI TẬP THỰC HÀNH PHP CĂN BẢN
+====================================
+Viết chương trình quản lý sản phẩm sử dụng session lưu trữ dữ liệu thay vì dùng cơ sở dữ liệu. 
+Chương trình cho phép thực hiện các chức năng thêm, xóa, sửa sản phẩm.
+
+Cấu trúc chương trình cơ bản gồm 4 file như sau:
+	1. products.php: Đây là file lưu trữ các hàm lấy danh sách, thêm, xóa và sửa sản phẩm
+	2. product-list.php: Đây là file hiển thị danh sách sản phẩm
+	3. product-add.php: Đây là file thực hiện hai thao tác đó là thêm và sửa thông tin sản phẩm
+	4. product-delete.php: Đây là file thực hiện thao tác xóa sản phẩm.
+Lưu ý:
+
+*********** Yêu cầu tuần 1 *****************************
+Lưu ý: Trong tuần này chúng ta có thể xem thông tin của 1 sản phẩm được lưu trữ dưới dạng mảng thay vì class
+
+1. Viết các hàm trong file products.php
+2. Viết xử lý giao diện hiển thị danh sách sản phẩm
+
+
+*********** Yêu cầu tuần 2 *****************************
+Lưu ý: chuyển cấu trúc sản phẩm từ dạng mảng sang class sau đó viết tiếp các chức năng sau
+
+1. Tạo giao diện cơ bản cho form thêm sản phẩm
+2. Viết chức năng thực hiện các thao tác cho chức năng thêm sản phẩm
+3. Viết chức năng cập nhật sản phẩm
+4. Viết chức năng xóa sản phẩm
+
+*********** Yêu cầu tuần 3 *****************************
+Yêu cầu:
+1. Tạo cơ sở dữ liệu gồm 1 bảng có tên là Product
+2. Chuyển chương trình đã viết trong tuần 2 thay vì dữ liệu sản phẩm lưu trữ trong session thì chúng ta chuyển sang 
+   tương tác với cơ sở dữ liệu.
