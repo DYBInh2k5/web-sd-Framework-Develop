@@ -1,0 +1,60 @@
+========================================================================================
+***********HƯỚNG DẪN ĐỊNH NGHĨA ROUTE VÀ HIỂN THỊ DANH SÁCH USER Ở MỨC CƠ BẢN***********
+========================================================================================
+1. Cấu hình thông số database kết nối
+	- mở file .env bổ sung thông tin kết nối với mysql như sau:
+		DB_CONNECTION=mysql
+		DB_HOST=127.0.0.1
+		DB_PORT=3306
+		DB_DATABASE=laravel12 # tên database cần dùng
+		DB_USERNAME=root     # tài khoản truy cập db. Mặc định sau khi cài đặt mysql tài khoản admin gồm: user: root, pass: 
+		DB_PASSWORD=
+	- Chạy lệnh migration để tạo bảng user (mặc định khi tạo project laravel nó đã chuẩn bị sẵn)
+		php artisan migrate  (reset dùng:  php artisan migrate:reset)
+2. Bổ sung code cho file DatabaseSeeder như sau:
+	...
+	public function run()
+    {
+         User::factory(10)->create();
+
+3. Chạy SEEDING
+	php artisan db:seed
+4. Run project : php artisan serve
+5. Đăng nhập và gõ http://127.0.0.1:8000/users xem kết quả
+
+==========================================================================================
+************ DEMO SỬ DỤNG MIDDLEWARE ĐƠN GIẢN ********************
+==========================================================================================
+1.Tạo middleware CheckAge bằng lệnh sau:
+	    php artisan make:middleware CheckAge
+	=> Tạo 1 file có tên CheckAge.php trong thư mục App/http/middleware
+2. Bổ sung code cho file CheckAge.php như sau:
+	    public function handle(Request $request, Closure $next)
+		{
+			if ($request->age >= 200) {
+				return redirect('/checkfail');
+			}
+			return $next($request);
+		}
+
+3. Đăng kí middleware thuộc nhóm web.php trong bootstrap/app.php 
+	...
+	...
+	   ->withMiddleware(function (Middleware $middleware): void {
+        	//bo sung middleware cho web routes
+         		$middleware->web(append: [
+            		\App\Http\Middleware\CheckAge::class,
+        		]);
+    		})
+	...
+4. Định nghĩa thêm route để test CheckAge middleware trong file routes/web.php
+	
+		Route::get('/check_fail', function (){
+			echo "checkfail page";
+			return view('home.admin');
+		});
+		Route::get('check_age/{age?}', function ($age) {
+			echo $age;
+			return view('home.admin');
+		})->middleware(\App\Http\Middleware\CheckAge::class);
+5. Áp dụng thêm thuộc tính role cho User, kiểm tra role trước khi sử dụng chức năng 
