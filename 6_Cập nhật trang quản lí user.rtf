@@ -1,0 +1,163 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2868
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Monaco;\f2\fswiss\fcharset0 Helvetica;
+}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue255;\red0\green0\blue0;\red144\green1\blue18;
+\red0\green0\blue255;\red144\green1\blue18;\red19\green118\blue70;\red15\green112\blue1;}
+{\*\expandedcolortbl;;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c0\c0;\cssrgb\c63922\c8235\c8235;
+\cssrgb\c0\c0\c100000;\cssrgb\c63922\c8235\c8235;\cssrgb\c3529\c52549\c34510;\cssrgb\c0\c50196\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww29200\viewh15980\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 ========================================================================================================\
+******************* HI\uc0\u7878 U CH
+\f1 \uc0\u7880 
+\f0 NH TRANG QU
+\f1 \uc0\u7842 
+\f0 N L\'dd USER V\'c0 C\uc0\u7852 P NH\u7852 T TH\'d4NG TIN C\u7910 A USER *************************\
+========================================================================================================\
+1. Th\uc0\u7921 c hi\u7879 n l\u7879 nh sau \u273 
+\f1 \uc0\u7875 
+\f0  bi
+\f1 \uc0\u7871 
+\f0 t c\'e1c route \uc0\u273 \'e3 t\u7921  \u273 \u7897 ng \u273 \u259 ng k\'ed v\u7899 i route tr\'ean\
+		php artisan route:list\
+	\
+	M
+\f1 \uc0\u7903 
+\f0  file routes/auth.php\
+	\'97 Xem k\uc0\u297  c\'e1c routes khai b\'e1o trong file n\'e0y \u273 
+\f1 \uc0\u7875 
+\f0  hi
+\f1 \uc0\u7875 
+\f0 u hi\uc0\u7879 n t\u7841 i Auth h
+\f1 \uc0\u7895 
+\f0  tr\uc0\u7907  nh\u7919 ng ch\u7913 c n\u259 ng g\'ec\
+	\'97 \uc0\u272 \u7885 c k\u297  c\'e1c routes nh\'f3m profile v\'e0 t\'ecm hi
+\f1 \uc0\u7875 
+\f0 u \uc0\u273 
+\f1 \uc0\u7875 
+\f0  tr
+\f1 \uc0\u7843 
+\f0  l\uc0\u7901 i c\'e1c c\'e2u h
+\f1 \uc0\u7887 
+\f0 i sau:\
+		+ \cb2 \expnd0\expndtw0\kerning0
+Route::get(\cf4 'settings/profile'\cf0 , [Settings\\ProfileController::\cf5 class\cf0 , \cf4 'edit'\cf0 ])->name(\cf4 'settings.profile.edit'\cf0 );\
+		+ Route::put(\cf4 'settings/profile'\cf0 , [Settings\\ProfileController::\cf5 class\cf0 , \cf4 'update'\cf0 ])->name(\cf4 'settings.profile.update'\cf0 );\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2     		+ Route::delete(\cf4 'settings/profile'\cf0 , [Settings\\ProfileController::\cf5 class\cf0 , \cf4 'destroy'\cf0 ])->name(\cf4 'settings.profile.destroy'\cf0 );\cb1 \
+\cb2     		+ Route::get(\cf4 'settings/password'\cf0 , [Settings\\PasswordController::\cf5 class\cf0 , \cf4 'edit'\cf0 ])->name(\cf4 'settings.password.edit'\cf0 );\cb1 \
+\cb2     		+ Route::put(\cf4 'settings/password'\cf0 , [Settings\\PasswordController::\cf5 class\cf0 , \cf4 'update'\cf0 ])->name(\cf4 'settings.password.update'\cf0 );\
+		\'97> m
+\f1 \uc0\u7903 
+\f0  file controller t\uc0\u432 \u417 ng \u7913 ng, h\'e0m n\'e0o trong file n\'e0y \u273 \u432 \u7907 c g\u7885 i h\'e3y \u273 \u7885 c \u273 
+\f1 \uc0\u7875 
+\f0  hi
+\f1 \uc0\u7875 
+\f0 u v\'e0 m
+\f1 \uc0\u7903 
+\f0  t\'ecm file view t\uc0\u432 \u417 ng \u7913 ng \u273 \u7885 c \u273 
+\f1 \uc0\u7875 
+\f0  hi
+\f1 \uc0\u7875 
+\f0 u c\'e1c th\'e0nh ph
+\f1 \uc0\u7847 
+\f0 n tr\'ean view. Sau \uc0\u273 \'f3 v\u7853 n d\u7909 ng 			cho th\u7921 c h\'e0nh cho ph
+\f1 \uc0\u7847 
+\f0 n b\'ean d\uc0\u432 \u7899 i.\
+	\'97  H\'e3y t\'ecm v\'e0 m
+\f1 \uc0\u7903 
+\f0  c\'e1c trang t\uc0\u432 \u417 ng \u7913 ng v\u7899 i c\'e1c routes 
+\f1 \uc0\u7903 
+\f0  tr\'ean b\uc0\u7857 ng tr\'ecnh duy\u7879 t.\
+\
+2. B
+\f1 \uc0\u7893 
+\f0  sung c\'e1c field App/Models/UserModel.php\
+	- role : d\'f9ng \uc0\u273 
+\f1 \uc0\u7875 
+\f0  x\'e1c \uc0\u273 \u7883 nh quy
+\f1 \uc0\u7873 
+\f0 n cho user\
+	- is_active: ki
+\f1 \uc0\u7875 
+\f0 u bool cho bi
+\f1 \uc0\u7871 
+\f0 t user c\'f3 \uc0\u273 ang active hay kh\'f4ng\
+\
+	... \
+	 \
+	\cf5 protected\cf0  $fillable = [\cb1 \
+\cb2         \cf4 'name'\cf0 ,\cb1 \
+\cb2         \cf4 'email'\cf0 ,\cb1 \
+\cb2         \cf4 'password'\cf0 ,\cb1 \
+\cb2         \cf4 'role'\cf0 ,\cb1 \
+\cb2         \cf4 'is_active'\cf0 ,\cb1 \
+\cb2     ];\cb1 \
+\
+\cb2 	... \
+	\
+	\cf5 protected\cf0  \cf5 function\cf0  casts(): \cf5 array\cf0 \cb1 \
+\cb2     \{\cb1 \
+\cb2         \cf5 return\cf0  [\cb1 \
+\cb2            \
+			. . . \
+\cb1 \
+\cb2             \cf4 'role'\cf0  => \cf4 'string'\cf0 ,\cb1 \
+\cb2             \cf4 'is_active'\cf0  => \cf4 'boolean'\cf0 ,\cb1 \
+\cb2         ];\cb1 \
+\cb2     \}\
+\cb1 	\cb2 ... \cb1 \
+\cb2 \
+\
+3. B\uc0\u7893  sung l\u7879 nh t\u7841 o th\'eam 2 c\u7897 t \
+	\cf5 \cb2 \outl0\strokewidth0 \strokec5 public\cf0 \strokec3  \cf5 \strokec5 function\cf0 \strokec3  up(): \cf5 \strokec5 void\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2     \{\cb1 \
+\cb2         Schema::create(\cf6 \strokec6 'users'\cf0 \strokec3 , \cf5 \strokec5 function\cf0 \strokec3  (Blueprint $table) \{\cb1 \
+\cb2            \
+			\cb2 \outl0\strokewidth0 ... \cb1 \outl0\strokewidth0 \strokec3 \
+\
+\cb2             $table->string(\cf6 \strokec6 'role'\cf0 \strokec3 )->default(\cf6 \strokec6 'user'\cf0 \strokec3 );\cb1 \
+\cb2             $table->boolean(\cf6 \strokec6 'is_active'\cf0 \strokec3 )->default(\cf5 \strokec5 true\cf0 \strokec3 );\cb1 \
+\cb2         \});\
+	\
+		\cb2 \outl0\strokewidth0 ... \cb1 \outl0\strokewidth0 \strokec3 \
+\
+\cb2       \cb1 \
+\cb2     \}\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 \outl0\strokewidth0 \
+\
+Th\uc0\u7921 c hi\u7879 n l\u7879 nh c\u7853 p nh\u7853 t c\u7845 u tr\'fac b\u7843 ng trong database\
+		php artisan migrate:refesh\
+\
+4. M\uc0\u7903  file database/factories/UserFactory.php\
+	B\uc0\u7893  sung 2 d\'f2ng code b\'ean d\u432 \u7899 i v\'e0o trong h\'e0m definition\
+\
+	\cf5 \cb2 \outl0\strokewidth0 \strokec5 public\cf0 \strokec3  \cf5 \strokec5 function\cf0 \strokec3  definition(): \cf5 \strokec5 array\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2     \{\cb1 \
+\cb2         \cf5 \strokec5 return\cf0 \strokec3  [\
+			\
+			\cb2 \outl0\strokewidth0 ... \cb1 \outl0\strokewidth0 \strokec3 \
+\cb2            \
+			// b\uc0\u7893  sung th\'e8m 2 d\'f2ng b\'ean d\u432 \u7899 i\cb1 \
+\cb2             \cb1 \
+\cb2             \cf6 \strokec6 'role'\cf0 \strokec3  => fake()->randomElement([\cf6 \strokec6 'admin'\cf0 \strokec3 , \cf6 \strokec6 'editor'\cf0 \strokec3 , \cf6 \strokec6 'user'\cf0 \strokec3 ]),\cb1 \
+\cb2             \cf6 \strokec6 'is_active'\cf0 \strokec3  => fake()->boolean(\cf7 \strokec7 80\cf0 \strokec3 ), \cf8 \strokec8 // 80% chance of being active\cf0 \cb1 \strokec3 \
+\cb2         ];\cb1 \
+\cb2     \}\
+	\
+	Ch\uc0\u7841 y SEEDING:\
+			php artisan db:seed\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 \outl0\strokewidth0 \
+5. C\uc0\u7853 p nh\u7853 t file View cho c\'e1c trang hi\u7875 n th\u7883  danh s\'e1ch user v\'e0 trang edit th\'f4ng tin user\
+	- T\uc0\u7921  b\u7893  sung th\'eam giao di\u7879 n hi\u7875 n th\u7883  th\'eam 2 c\u7897 t Role v\'e0 Status cho b\u7843 ng hi\u7875 n th\u7883  danh s\'e1ch user trong nh\'f3m ch\u7913 c n\u259 ng User Management\
+\
+6. Test l\uc0\u7841 i k\u7871 t qu\u7843 \
+7. T\'edch h\uc0\u7907 p ph\u7847 n middleware c\u7911 a tu\u7847 n tr\u432 \u7899 c v\'e0o project sau khi b\u7893  sung tr\u432 \u7901 ng Role v\'e0o User model\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2 \cf0 \kerning1\expnd0\expndtw0 	}
