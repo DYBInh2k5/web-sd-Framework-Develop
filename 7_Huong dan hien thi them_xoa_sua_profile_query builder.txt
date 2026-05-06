@@ -1,0 +1,107 @@
+=============================================================================================================================
+						TẠO TRANG WEB HIỂN BỔ SUNG VÀ CẬP NHẬT TIN THÔNG TIN PROFILE CỦA USER
+									DÙNG VỚI QUERY BUILDER
+=============================================================================================================================
+1. Tạo model Profile và table dùng migration tương ứng (quan hệ user và profile là 1-1)
+		php artisan make:model Profile -m //tạo migration kèm theo luôn
+		
+2. Bổ các thuộc tính (thông tin) cho Profile Model, CreateProfilesTable
+	VD: thông tin profile gồm: hình ảnh, ngày sinh, giới tính, số điện thoại, địa chỉ, họ tên đầy đủ
+	
+		class CreateProfilesTable extends Migration
+		{
+			public function up()
+			{
+				Schema::create('profiles', function (Blueprint $table) {
+					$table->id();
+					//bo sung
+					$table->integer('user_id');
+					$table->string('full_name',100);
+					$table->text('address');
+					$table->text('avatar');
+					$table->date('birthday');
+				   //ket thuc
+					$table->timestamps();
+				});
+			}
+		-------------------------------------------
+		class Profile extends Model
+		{
+			use HasFactory;
+			protected $fillable = [
+				'full_name', 'address', 'birthday','avatar', 'user_id'
+			];
+
+		}
+		
+		-------------------------------------------
+3. Chạy migration, sau đó xem kết quả tạo các bảng trong database 
+	php artisan migrate ( reset dùng:  php artisan migrate:reset)
+	- nhập liệu cho bảng profiles trong database
+	
+4. Cập nhật code tại ProfileController.php
+	- Thay vì lấy thông tin từ users để hiển thị thông tin Profile thì lấy từ bảng profiles
+	---------------------------------
+	Bổ sung thêm hàm Http/Controller/Setting/ProfileController.php
+
+		public function show(Request $request)
+		{
+		   $profile =  DB::table('profiles')->where('user_id',$id)->first();
+
+			return View('profile.show',['profile'=>$profile]);
+		}
+	----------------------------------
+
+5. Cập nhật pages/profile.blade.php
+@extends('layouts.app')
+			
+@section('content')
+    <x-common.page-breadcrumb pageTitle="User Profile" />
+    {{-- <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] lg:p-6">
+        <h3 class="mb-5 text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-7">Profile</h3>
+        <x-profile.profile-card />
+        <x-profile.personal-info-card />
+        <x-profile.address-card />
+    </div> --}}
+    <x-common.component-card title="test profile" desc="This is a test profile card.">
+        <div class="flex items-center space-x-4">
+            <img class="w-16 h-16 rounded-full" src="{{ $profile->avatar }}" alt="{{ $profile->full_name }}">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ $profile->full_name }}</h2>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ $profile->address }}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Birthday: {{ \Carbon\Carbon::parse($profile->birthday)->format('F j, Y') }}</p>
+            </div>
+        </div>
+    </x-common.component-card>
+@endsection
+
+	
+6. Thêm route vào file routes/web.php
+	Route::middleware(['auth'])->group(function () {
+    		Route::get('/profile', [\App\Http\Controllers\Settings\ProfileController::class, 'show'])->name('profile.show');
+	});
+7. Bổ sung code cho các hàm edit, update trong file Http/Controller/Setting/ProfileController.php, cho phép cập nhật thông tin dữ liệu của bảng profile
+
+		public function update(Request $request, $id)
+		{
+			...
+			
+			//bo sung doan code nay
+			$profile = DB::table('profiles')->find($id);
+			$profile->full_name = $request->input('full_name');
+			$profile->address = $request->input('address');
+			$profile->birthday = $request->input('birthday');
+			$affected = DB::table('profiles')
+				->where('id', $id)
+				->update(['full_name' =>  $profile->full_name,
+							'address' =>  $profile->address,
+							'birthday' =>  $profile->birthday
+					]);
+			
+			...
+		}
+
+8. Test kết quả
+	
+		
+		
